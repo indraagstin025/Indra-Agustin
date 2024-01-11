@@ -22,17 +22,20 @@
                         </tr>
                     </thead>
                     <tbody> 
-                        @forelse ($students as $student)
+                        @forelse ($students as $student )
                         <tr>
                             <td>{{ $student->id }}</td>
                             <td>{{ $student->name }}</td>
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->phone }}</td>
                             <td>
-                                <a href="{{ url('/') }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('/student/edit/'.$student->id) }}" 
+                                    class="btn btn-primary">Edit</a>
                             </td>
                             <td>
-                                <a href="{{ url('/') }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ route('students.destroy', $student->id) }}" class="btn btn-danger">Delete</a>
+                                {{-- @csrf
+                                @method('delete') --}}
                             </td>
                         </tr>
                         @empty

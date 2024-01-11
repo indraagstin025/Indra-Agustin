@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/EditForm', function () {
+    return view('student.edit');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,7 +34,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::controller(App\Http\Controllers\StudentController::class)->group(function () {
-    Route::get('/students', 'index');
+    Route::get('/students', 'index')->name('student.index');
     Route::get('/add-student', 'create');
     Route::post('/add-student', 'store');
+    Route::get('/student/edit/{student_id}','edit')->name('student.edit');
+    Route::put('/students/update/{student_id}', 'update')->name('students.update');
+    Route::get('/students/destroy/{student_id}', 'destroy')->name('students.destroy');
 });
